@@ -1,99 +1,50 @@
+
+import java.util.HashSet;
 import java.util.Scanner;
+import java.util.Set;
 
-class ProgramDemo6 {
+class ProgramDemo6{
 
-    public void sumOfDiagonal(int r , int c , int sum , int arr[][]){
-
-        for (int i = 0; i < r; i++) {
-            for (int j = 0; j < c; j++) {
-                if (i == j) {
-                    sum = sum +  arr[i][j];
-                }
-            }
-        }
-        System.out.println("Sum of diagonal elements = " + sum);
-
-    }
-
-    public void sumOfUpperDaigonal(int r , int c , int sum , int arr[][]){
-
-        for (int i = 0; i < r; i++) {
-            for (int j = 0; j < c; j++) {
-                if (i < j) {
-                    sum = sum + arr[i][j];
-                }
-            }
-        }
-        System.out.println("Sum of upper diagonal elements = " + sum);
-
-    }
-
-    public void sumOfLowerDaigonal(int r , int c , int sum , int arr[][]){
-
-        for (int i = 0; i < r; i++) {
-            for (int j = 0; j < c; j++) {
-                if (i > j) {
-                    sum += arr[i][j];
-                }
-            }
-        }
-        System.out.println("Sum of lower diagonal elements = " + sum);
-
-    }
     public static void main(String[] args) {
 
         Scanner sc = new Scanner(System.in);
+        Set<Integer> SA =  new HashSet<>();
+        Set<Integer> SB = new HashSet<>();
 
-        ProgramDemo6 obj = new ProgramDemo6();
+        System.out.println("Enter the Total Number o Elements of SA : "); 
+        int na = sc.nextInt();
 
-        System.out.print("Enter number of rows: ");
-        int r = sc.nextInt();
-        System.out.print("Enter number of columns: ");
-        int c = sc.nextInt();
-
-        int[][] arr = new int[r][c];
-
-        System.out.println("Enter matrix elements:");
-        for (int i = 0; i < r; i++) {
-            for (int j = 0; j < c; j++) {
-                arr[i][j] = sc.nextInt();
-            }
+        System.out.println("Enter the element : ");
+        for(int i = 0 ; i < na ; i ++){
+            int ele = sc.nextInt();
+            SA.add(ele);
         }
 
-        int choice;
-        do {
-            System.out.println("\n**** Menu *****\n");
-            System.out.println("1. Sum of diagonal elements : ");
-            System.out.println("2. Sum of upper diagonal elements : ");
-            System.out.println("3. Sum of lower diagonal elements : ");
-            System.out.println("4. Exit : ");
-            System.out.print("Enter your choice : ");
-            choice = sc.nextInt();
+        System.out.println("Enter the Total Number of Elements of SB : ");
+        int nb = sc.nextInt();
 
-            int sum = 0;
+        for(int i = 0 ; i < nb ; i++){
+            int ele = sc.nextInt();
+            SB.add(ele);
+        }
 
-            switch (choice) {
-                case 1:
-                    obj.sumOfDiagonal(r , c , sum , arr);
-                    break;
+        System.out.println("Operation on Set : ");
 
-                case 2:
-                    obj.sumOfUpperDaigonal(r , c , sum , arr);
-                    break;
+        Set<Integer> u  = new HashSet<>(SA);
+        u.addAll(SB);
+        System.out.println("Union (A U B) : "+u);
 
-                case 3:
-                    obj.sumOfLowerDaigonal(r , c , sum , arr);
-                    break;
+        Set<Integer> i = new HashSet<>(SA);
+        i.retainAll(SB);
+        System.out.println("Intersection (A n B) : "+i);
 
-                case 4:
-                    System.exit(0);
-                    System.out.println("Exiting program...");
-                    break;
+        Set<Integer> ca = new HashSet<>(SA);
+        ca.removeAll(SB);
+        System.out.println("Complement (A - B) : "+ca);
 
-                default:
-                    System.out.println("Invalid choice!");
-            }
+        Set<Integer>  cb  = new HashSet<>(SB);
+        cb.removeAll(SA);
+        System.out.println("Compliment (B - A) : "+cb);
 
-        }while(choice != 4);
     }
 }
